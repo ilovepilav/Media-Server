@@ -1,0 +1,7 @@
+html
+  head
+    title= title
+  body
+    h1 Hello World
+    each item in json
+      a(href=('/' + item.name)) !{item.name}
