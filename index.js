@@ -1,17 +1,22 @@
 import express from 'express'
-import { getDirTree  } from './functions.js'
+import { getDirTree } from './functions.js'
+import { engine } from 'express-handlebars'
 
 const app = express()
-app.set('view engine', 'pug')
+app.engine('.hbs', engine({ extname: '.hbs' }))
+app.set('view engine', '.hbs')
+app.set('views', 'views/')
 app.use(express.static('public'))
 
-app.get('/:id?', async (req, res)=>{
-  const json = await getDirTree(req.params.id)
-  console.log(json.children)
-
-  res.render('index', {title: 'Selam', json: json.children})
+app.get('/', async (req, res) => {
+  res.render('home')
 })
 
-app.listen(3000, ()=>{
+app.get('/getfolders', async (req, res) => {
+  const json = await getDirTree()
+  res.json(json.children)
+})
+
+app.listen(3000, () => {
   console.log('listening on port 3000')
 })
