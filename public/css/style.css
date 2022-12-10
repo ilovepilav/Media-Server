@@ -1,0 +1,27 @@
+.col{
+  display:flex;
+  flex-direction:column;
+}
+
+.row{
+  display:flex;
+  flex-direction:row;
+}
+
+.media-player{
+  height:75vh;
+}
+
+.sidebar{
+  max-height:75vh;
+  overflow-y:scroll;
+}
+
+li{
+  list-style-type:none;
+}
+
+li:hover{
+  font-weight:bold;
+  cursor:pointer;
+}
