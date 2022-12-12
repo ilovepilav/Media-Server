@@ -1,7 +1,7 @@
 let data;
-let outerUl = document.getElementById('outer-list')
-let videoElement = document.getElementById('video-element')
-
+const outerUl = document.getElementById('outer-list')
+const videoElement = document.getElementById('video-element')
+const dropDown = document.getElementById('dropdown')
 
 const getFolders = async () => {
   const folderData = await fetch('/getfolders')
@@ -16,7 +16,6 @@ const fillDropdown = async () => {
   if (!data) {
     data = await getFolders()
   }
-  const dropDown = document.getElementById('dropdown')
 
   data.map((element) => {
     const tempDropElement = document.createElement('option')
@@ -54,7 +53,6 @@ const createLiElement = (data) => {
   liElement.setAttribute('data', data.path)
   liElement.addEventListener('click', (e) => {
     e.preventDefault()
-    console.log(e.target)
     const source = e.target.getAttribute('data')
     return changeVideo(source)
   })
@@ -68,10 +66,10 @@ const createUlElement = (data) => {
   ulElement.appendChild(createH4Element(data.name))
 
   data.children && data.children.sort((a, b) => { return abcSort(a.name, b.name) }).map((ele) => {
-    if (ele.name.endsWith('.mp4')) {
-      ulElement.appendChild(createLiElement(ele))
-    } else {
+    if (ele.type === 'directory') {
       ulElement.appendChild(createUlElement(ele))
+    } else {
+      ulElement.appendChild(createLiElement(ele))
     }
   })
   return ulElement
