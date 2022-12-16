@@ -1,5 +1,5 @@
 import dirTree from 'directory-tree'
-import { allowedVideoTypes } from './constants.js'
+import { allowedVideoTypes } from '../constants.js'
 
 const getDirTree = async () => {
   const reg = new RegExp(`\.(${allowedVideoTypes.join('|')})`)
