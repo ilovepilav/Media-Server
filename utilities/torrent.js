@@ -6,6 +6,10 @@ export const startTorrentDaemon = async () => {
   return await commandExec('transmission-daemon')
 }
 
+export const stopTorrentDaemon = async () => {
+  return await commandExec('killall transmission-daemon')
+}
+
 export const checkDaemonRunning = async () => {
   const result = await commandExec('pgrep transmission-da')
   if (!result) return false
@@ -26,20 +30,12 @@ export const stopTorrent = async (torrentId) => {
   return await commandExec(`transmission-remote -t ${torrentId} --remove`)
 }
 
-export const stopAllTorrent = async () => {
-  return await commandExec('transmission-remote -t all --remove')
-}
-
 export const pauseTorrent = async (torrentId) => {
   return await commandExec(`transmission-remote -t ${torrentId} --stop`)
 }
 
-export const pauseAllTorrent = async () => {
-  return await commandExec('transmission-remote -t all --stop')
-}
-
-export const startAllTorrent = async () => {
-  return await commandExec('transmission-remote -t all --start')
+export const startTorrent = async (torrentId) => {
+  return await commandExec(`transmission-remote -t ${torrentId} --start`)
 }
 
 export const commandExec = async (command) => {
