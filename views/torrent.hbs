@@ -1,0 +1,19 @@
+<form action="/torrent/list-torrents" method="post">
+  <button>List Torrents</button>
+</form>
+
+<form action="/torrent/check-daemon" method="post">
+  <button>Check Daemon</button>
+</form>
+
+<form action="/torrent/start-daemon" method="post">
+  <button>Start Daemon</button>
+</form>
+
+<form action="/torrent/stop-daemon" method="post">
+  <button>Stop Daemon</button>
+</form>
+
+{{#each output}}
+  <p>{{this}}</p>
+{{/each}}

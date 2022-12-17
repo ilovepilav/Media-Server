@@ -37,16 +37,6 @@ app.get('/login', (req, res) => {
   res.render('login')
 })
 
-// app.post('/exec', async (req, res) => {
-//   const { command } = req.body
-//   const result = await commandExec(command)
-//   res.render('demo', { output: result.split('\n') })
-// })
-
-// app.get('/demo', (req, res) => {
-//   res.render('demo')
-// })
-
 app.use(auth)
 
 app.get('/', async (req, res) => {
@@ -58,7 +48,12 @@ app.get('/getfolders', async (req, res) => {
   res.json(json.children)
 })
 
-app.use('/torrent/:command', torrentRoute)
+
+app.get('/torrent', (req, res) => {
+  res.render('torrent')
+})
+
+app.post('/torrent/:command', torrentRoute)
 
 app.listen(3000, () => {
   console.log('listening on port 3000')
