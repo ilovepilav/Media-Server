@@ -13,8 +13,8 @@ export const stopTorrentDaemon = async () => {
 export const checkDaemonRunning = async () => {
   const result = await commandExec('pgrep transmission-da')
   if (!result) return false
-  if (!result[0]) return false
-  if (!isNan(result[0])) return false
+  if (!result[0].startsWith('Error')) return false
+  if (!isNaN(result[0])) return false
   return true
 }
 
@@ -47,6 +47,6 @@ export const commandExec = async (command) => {
     return stdout
 
   } catch (error) {
-    return error
+    return error.toString()
   }
 }

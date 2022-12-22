@@ -50,7 +50,7 @@ app.get('/getfolders', async (req, res) => {
 
 
 app.get('/torrent', (req, res) => {
-  res.render('torrent')
+  res.render('torrentmain')
 })
 
 app.post('/torrent/:command', torrentRoute)

@@ -1,19 +1,12 @@
-<form action="/torrent/list-torrents" method="post">
-  <button>List Torrents</button>
-</form>
+<button class="request-button" id="list-torrents">List Torrents</button>
 
-<form action="/torrent/check-daemon" method="post">
-  <button>Check Daemon</button>
-</form>
+<button class="request-button" id="check-daemon">Check Daemon</button>
 
-<form action="/torrent/start-daemon" method="post">
-  <button>Start Daemon</button>
-</form>
+<button class="request-button" id="start-daemon">Start Daemon</button>
 
-<form action="/torrent/stop-daemon" method="post">
-  <button>Stop Daemon</button>
-</form>
+<button class="request-button" id="stop-daemon">Stop Daemon</button>
 
-{{#each output}}
-  <p>{{this}}</p>
-{{/each}}
+<div id="output">
+</div>
+<script src="../js/torrent.js">
+</script>

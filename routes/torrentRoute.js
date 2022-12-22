@@ -9,7 +9,7 @@ export const torrentRoute = async (req, res) => {
         await torrentCommands.startTorrentDaemon()
         break;
       case 'check-daemon':
-        response = await torrentCommands.checkDaemonRunning()
+        response = await torrentCommands.checkDaemonRunning() ? 'Running' : 'Not running'
         break;
       case 'stop-daemon':
         await torrentCommands.stopTorrentDaemon()
@@ -36,6 +36,6 @@ export const torrentRoute = async (req, res) => {
     response = `Error : ${error}`
   }
 
-  res.render('torrent', { output: response })
+  res.json({ output: response.split('\n') })
 }
 
