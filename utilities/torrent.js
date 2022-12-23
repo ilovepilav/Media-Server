@@ -14,18 +14,19 @@ export const stopTorrentDaemon = async () => {
 
 export const checkDaemonRunning = async () => {
   const result = await commandExec('pgrep transmission-da')
-  if (!result) return false
-  if (!result.startsWith('Error')) return false
   if (!isNaN(result[0])) return true
+  return false
 }
 
 
 export const listTorrents = async () => {
+  if (!(await checkDaemonRunning())) return 'Daemon is not running'
   return await commandExec('transmission-remote -l')
 }
 
 export const addTorrent = async (magnetUrl, dirPath) => {
-  return await commandExec(`transmission-remote -a "${magnetUrl}" -w ${dirPath}`)
+  const currentDirectory = process.cwd()
+  return await commandExec(`transmission-remote -a "${magnetUrl}" -w ${currentDirectory}/public/media/${dirPath}`)
 }
 
 export const stopTorrent = async (torrentId) => {

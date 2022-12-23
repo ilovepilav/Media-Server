@@ -1,11 +1,6 @@
 const outputFrame = document.getElementById('output')
 const folderSelection = document.getElementById('folder-selection')
-const magnetUrlInput = document.getElementById('magnet-url')
-
 const addTorrent = async () => {
-  const dirPath = folderSelection.value
-  const magnetUrl = magnetUrlInput.value
-  if (!dirPath || !magnetUrl) return console.error('path empty')
   await sendRequest('/torrent/add-torrent', { url: magnetUrl, path: dirPath })
 }
 
@@ -38,7 +33,7 @@ const stopDaemon = async () => {
 }
 
 const getDirList = async () => {
-  folderSelection.innerHTML = ''
+  optionElement.innerHTML = ''
   const folders = await fetch('/getfolders')
   const foldersJson = await folders.json()
   foldersJson.map((item) => {

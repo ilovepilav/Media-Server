@@ -9,7 +9,7 @@ export const torrentRoute = async (req, res) => {
         await torrentCommands.startTorrentDaemon()
         break;
       case 'check-daemon':
-        response = await torrentCommands.checkDaemonRunning() ? 'Running' : 'Not running'
+        response = await torrentCommands.checkDaemonRunning() ? 'Daemon is Running' : 'Daemon is not running'
         break;
       case 'stop-daemon':
         await torrentCommands.stopTorrentDaemon()
