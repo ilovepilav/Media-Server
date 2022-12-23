@@ -32,8 +32,8 @@ const stopDaemon = async () => {
 }
 
 
-
 const sendRequest = async (endPoint, body) => {
+  outputFrame.innerHTML = ''
   const result = await fetch(endPoint, { method: 'post', body: body })
   const resultJson = await result.json()
   resultJson.output.map((item) => {

@@ -6,15 +6,32 @@
       onclick="listTorrents()"
     >List Torrents</button>
 
-    <button class="request-button" id="check-daemon">Check Daemon</button>
+    <button
+      class="request-button"
+      id="check-daemon"
+      onclick="checkDaemon()"
+    >Check Daemon</button>
 
-    <button class="request-button" id="start-daemon">Start Daemon</button>
+    <button
+      class="request-button"
+      id="start-daemon"
+      onclick="startDaemon()"
+    >Start Daemon</button>
 
-    <button class="request-button" id="stop-daemon">Stop Daemon</button>
+    <button class="request-button" id="stop-daemon" onclick="stopDaemon()">Stop
+      Daemon</button>
   </div>
-  <div class="col torrent-list">
-    <div id="output">
-    </div>
+  <div class="col torrent-add">
+    <select>
+      <option>Some folder</option>
+      <option>Some another</option>
+    </select>
+    <input id="magnet-url" placeholder="Enter magnet url" />
+    <button id="submit-magnet" onclick="addTorrent">Add Torrent</button>
+  </div>
+</div>
+<div class="col torrent-list">
+  <div id="output">
   </div>
 </div>
 <script src="../js/torrent.js">
