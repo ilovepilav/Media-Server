@@ -50,7 +50,14 @@ const getDirList = async () => {
 
 const sendRequest = async (endPoint, body) => {
   outputFrame.innerHTML = ''
-  const result = await fetch(endPoint, { method: 'post', body: body })
+  const result = await fetch(endPoint, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify(body)
+  })
   const resultJson = await result.json()
   resultJson.output.map((item) => {
     const pLine = createPElement(item)
