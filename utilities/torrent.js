@@ -3,20 +3,22 @@ import child_process from 'child_process'
 const exec = util.promisify(child_process.exec);
 
 export const startTorrentDaemon = async () => {
-  return await commandExec('transmission-daemon')
+  if (!(await checkDaemonRunning())) {
+    return await commandExec('transmission-daemon')
+  }
 }
 
 export const stopTorrentDaemon = async () => {
-  return await commandExec('killall transmission-daemon')
+  return await commandExec('pkill -f transmission*')
 }
 
 export const checkDaemonRunning = async () => {
   const result = await commandExec('pgrep transmission-da')
   if (!result) return false
-  if (!result[0].startsWith('Error')) return false
-  if (!isNaN(result[0])) return false
-  return true
+  if (!result.startsWith('Error')) return false
+  if (!isNaN(result[0])) return true
 }
+
 
 export const listTorrents = async () => {
   return await commandExec('transmission-remote -l')
@@ -50,3 +52,4 @@ export const commandExec = async (command) => {
     return error.toString()
   }
 }
+
