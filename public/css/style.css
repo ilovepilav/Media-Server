@@ -25,3 +25,15 @@ li:hover{
   font-weight:bold;
   cursor:pointer;
 }
+
+.torrent-buttons{
+  gap:.5rem;
+  width:15%;
+}
+
+.torrent-list{
+  margin-left:1rem;
+  flex:1;
+  width:75%;
+  background-color:gray;
+}

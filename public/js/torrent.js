@@ -1,17 +1,40 @@
 const outputFrame = document.getElementById('output')
-document.querySelectorAll('.request-button').forEach((item) => {
-  item.addEventListener('click', (e) => {
-    e.preventDefault()
-    outputFrame.innerHTML = ''
-    sendRequest(e.target)
-  })
-})
+const addTorrent = async () => {
+  await sendRequest('/torrent/add-torrent', { url: magnetUrl, path: dirPath })
+}
+
+const startTorrent = async () => {
+  await sendRequest('/torrent/start-torrent', { id: torrentId })
+}
+
+const stopTorrent = async () => {
+  await sendRequest('/torrent/stop-torrent', { id: torrentId })
+}
+
+const pauseTorrent = async () => {
+  await sendRequest('/torrent/pause-torrent', { id: torrentId })
+}
+
+const listTorrents = async () => {
+  await sendRequest('/torrent/list-torrents')
+}
+
+const checkDaemon = async () => {
+  await sendRequest('/torrent/check-daemon')
+}
+
+const startDaemon = async () => {
+  await sendRequest('/torrent/start-daemon')
+}
+
+const stopDaemon = async () => {
+  await sendRequest('/torrent/stop-daemon')
+}
 
 
 
-
-const sendRequest = async (sender) => {
-  const result = await fetch(`/torrent/${sender.id}`, { method: 'post' })
+const sendRequest = async (endPoint, body) => {
+  const result = await fetch(endPoint, { method: 'post', body: body })
   const resultJson = await result.json()
   resultJson.output.map((item) => {
     const pLine = createPElement(item)

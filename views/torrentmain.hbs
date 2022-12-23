@@ -1,12 +1,21 @@
-<button class="request-button" id="list-torrents">List Torrents</button>
+<div class="row">
+  <div class="col torrent-buttons">
+    <button
+      class="request-button"
+      id="list-torrents"
+      onclick="listTorrents()"
+    >List Torrents</button>
 
-<button class="request-button" id="check-daemon">Check Daemon</button>
+    <button class="request-button" id="check-daemon">Check Daemon</button>
 
-<button class="request-button" id="start-daemon">Start Daemon</button>
+    <button class="request-button" id="start-daemon">Start Daemon</button>
 
-<button class="request-button" id="stop-daemon">Stop Daemon</button>
-
-<div id="output">
+    <button class="request-button" id="stop-daemon">Stop Daemon</button>
+  </div>
+  <div class="col torrent-list">
+    <div id="output">
+    </div>
+  </div>
 </div>
 <script src="../js/torrent.js">
 </script>
