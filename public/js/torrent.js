@@ -6,35 +6,51 @@ const addTorrent = async () => {
   const dirPath = folderSelection.value
   const magnetUrl = magnetUrlInput.value
   if (!dirPath || !magnetUrl) return console.error('path empty')
-  await sendRequest('/torrent/add-torrent', { url: magnetUrl, path: dirPath })
+  clearOutput()
+  const result = await sendRequest('/torrent/add-torrent', { url: magnetUrl, path: dirPath })
+  fillOutput(result)
 }
 
+
 const startTorrent = async () => {
-  await sendRequest('/torrent/start-torrent', { id: torrentId })
+  clearOutput()
+  const result = await sendRequest('/torrent/start-torrent', { id: torrentId })
+  fillOutput(result)
 }
 
 const stopTorrent = async () => {
-  await sendRequest('/torrent/stop-torrent', { id: torrentId })
+  clearOutput()
+  const result = await sendRequest('/torrent/stop-torrent', { id: torrentId })
+  fillOutput(result)
 }
 
 const pauseTorrent = async () => {
-  await sendRequest('/torrent/pause-torrent', { id: torrentId })
+  clearOutput()
+  const result = await sendRequest('/torrent/pause-torrent', { id: torrentId })
+  fillOutput(result)
 }
 
 const listTorrents = async () => {
-  await sendRequest('/torrent/list-torrents')
+  clearOutput()
+  const result = await sendRequest('/torrent/list-torrents')
 }
 
 const checkDaemon = async () => {
-  await sendRequest('/torrent/check-daemon')
+  clearOutput()
+  const result = await sendRequest('/torrent/check-daemon')
+  fillOutput(result)
 }
 
 const startDaemon = async () => {
-  await sendRequest('/torrent/start-daemon')
+  clearOutput()
+  const result = await sendRequest('/torrent/start-daemon')
+  fillOutput(result)
 }
 
 const stopDaemon = async () => {
-  await sendRequest('/torrent/stop-daemon')
+  clearOutput()
+  const result = await sendRequest('/torrent/stop-daemon')
+  fillOutput(result)
 }
 
 const getDirList = async () => {
@@ -48,8 +64,8 @@ const getDirList = async () => {
 }
 
 
+
 const sendRequest = async (endPoint, body) => {
-  outputFrame.innerHTML = ''
   const result = await fetch(endPoint, {
     headers: {
       'Accept': 'application/json',
@@ -59,7 +75,16 @@ const sendRequest = async (endPoint, body) => {
     body: JSON.stringify(body)
   })
   const resultJson = await result.json()
-  resultJson.output.map((item) => {
+
+  return resultJson
+}
+
+const clearOutput = () => {
+  outputFrame.innerHTML = ''
+}
+
+const fillOutput = (jsonData) => {
+  jsonData.output.map((item) => {
     const pLine = createPElement(item)
     outputFrame.appendChild(pLine)
   })

@@ -7,7 +7,6 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import { loginPost } from './routes/loginRoute.js'
 import mongoose from 'mongoose'
-import { commandExec } from './utilities/torrent.js'
 import { torrentRoute } from './routes/torrentRoute.js'
 
 dotenv.config()
