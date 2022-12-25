@@ -34,7 +34,7 @@ const listTorrents = async () => {
   clearOutput()
   const result = await sendRequest('/torrent/list-torrents')
   result.output.map((line, index) => {
-    if (index == 0 || index == result.output.count() + 1) {
+    if (index == 0 || index == result.output.length + 1) {
       const pLine = createPElement(line)
       outputFrame.appendChild(pLine)
     } else {
