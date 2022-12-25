@@ -33,6 +33,15 @@ const pauseTorrent = async () => {
 const listTorrents = async () => {
   clearOutput()
   const result = await sendRequest('/torrent/list-torrents')
+  result.output.map((line, index) => {
+    if (index == 0 || index == result.output.count() + 1) {
+      const pLine = createPElement(line)
+      outputFrame.appendChild(pLine)
+    } else {
+      const torrentLine = createTorrentLineElement(line)
+      outputFrame.appendChild(torrentLine)
+    }
+  })
 }
 
 const checkDaemon = async () => {
@@ -99,5 +108,12 @@ const createOptionElement = (name) => {
   const element = document.createElement('option')
   element.innerText = name
   return element
+}
+const createTorrentLineElement = (line) => {
+  const divElement = document.createElement('div')
+  divElement.classList.add('torrent-line')
+  const pElement = createPElement(line)
+  divElement.appendChild(pElement)
+  return divElement
 }
 getDirList()
